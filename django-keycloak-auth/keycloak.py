@@ -193,7 +193,7 @@ class KeycloakConnect:
             json: user info data
         """
         headers = {"authorization": "Bearer " + token}
-        response = requests.request("GET", self.userinfo_endpoint, headers=headers)
+        response = requests.request("GET", self.userinfo_endpoint, headers=headers, verify=False)
         error = response.raise_for_status()
         if error:
             LOGGER.error(
