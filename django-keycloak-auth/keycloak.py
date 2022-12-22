@@ -78,7 +78,7 @@ class KeycloakConnect:
         Returns:
             [type]: [list of keycloak endpoints]
         """
-        response = requests.request("GET", self.well_known_endpoint)
+        response = requests.request("GET", self.well_known_endpoint, verify=False)
         error = response.raise_for_status()
         if error:
             LOGGER.error(
@@ -125,7 +125,7 @@ class KeycloakConnect:
             "authorization": "Bearer " + token,
         }
         response = requests.request(
-            "POST", self.token_introspection_endpoint, data=payload, headers=headers
+            "POST", self.token_introspection_endpoint, data=payload, headers=headers, verify=False
         )
         error = response.raise_for_status()
         if error:
